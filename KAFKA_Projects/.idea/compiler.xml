@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for KAFKA_consumer" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.40/lombok-1.18.40.jar" />
+        </processorPath>
+        <module name="KAFKA_consumer" />
+        <module name="KAFKA_producer" />
+        <module name="KAFKA_SpringFunction_For_Producer" />
+        <module name="KAFKA_SpringFunction_For_Producer (1)" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="KAFKA_SpringFunction_For_Consumer" target="21" />
+      <module name="KAFKA_SpringFuntions" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="KAFKA_SpringFunction_For_Consumer" options="-parameters" />
+      <module name="KAFKA_SpringFunction_For_Producer" options="-parameters" />
+      <module name="KAFKA_SpringFunction_For_Producer (1)" options="-parameters" />
+      <module name="KAFKA_SpringFuntions" options="-parameters" />
+      <module name="KAFKA_consumer" options="-parameters" />
+      <module name="KAFKA_producer" options="-parameters" />
+    </option>
+  </component>
+</project>

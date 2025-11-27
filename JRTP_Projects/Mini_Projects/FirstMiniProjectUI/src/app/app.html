@@ -1,0 +1,79 @@
+<div style="padding:20px;max-width:1000px;margin:0 auto;font-family:Arial,Helvetica,sans-serif;">
+
+  <h2>Citizen Plan Search</h2>
+
+  <h1 style="color:red">TEST HEADER</h1>
+
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:end">
+    <div>
+      <label>Plan Name</label><br>
+      <select [(ngModel)]="planName">
+        <option value="">-- Select --</option>
+        <option *ngFor="let p of planNames" [value]="p">{{p}}</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Plan Status</label><br>
+      <select [(ngModel)]="planStatus">
+        <option value="">-- Select --</option>
+        <option *ngFor="let s of planStatuses" [value]="s">{{s}}</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Gender</label><br>
+      <select [(ngModel)]="gender">
+        <option value="">-- Select --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Start Date</label><br>
+      <input type="date" [(ngModel)]="startDate">
+    </div>
+
+    <div>
+      <label>End Date</label><br>
+      <input type="date" [(ngModel)]="endDate">
+    </div>
+
+    <div>
+      <button (click)="search()" style="height:34px">Search</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <div *ngIf="results.length === 0">
+    <i>No data found</i>
+  </div>
+
+  <table *ngIf="results.length > 0" border="1" cellpadding="6" cellspacing="0" style="width:100%;border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th>Name</th><th>Gender</th><th>Plan Name</th><th>Plan Status</th><th>Start Date</th><th>End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of results">
+        <td>{{ r.citizenName }}</td>
+        <td>{{ r.gender }}</td>
+        <td>{{ r.planName }}</td>
+        <td>{{ r.planStatus }}</td>
+        <td>{{ r.startDate }}</td>
+        <td>{{ r.endDate }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+  <div>
+    Export:
+    <a href="#" (click)="downloadExcel(); $event.preventDefault()">Excel</a> |
+    <a href="#" (click)="downloadPdf(); $event.preventDefault()">PDF</a>
+  </div>
+</div>
