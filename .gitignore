@@ -1,0 +1,36 @@
+# Build folders
+/target/
+/build/
+
+# Maven wrapper
+.mvn/
+
+# IDEs
+/.idea/
+/*.iml
+.classpath
+.project
+.settings/
+/.vscode/
+
+# Logs and temp
+*.log
+*.tmp
+*.swp
+*~
+
+# Compiled and packaged files
+*.class
+*.jar
+*.war
+*.ear
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Env
+.env
