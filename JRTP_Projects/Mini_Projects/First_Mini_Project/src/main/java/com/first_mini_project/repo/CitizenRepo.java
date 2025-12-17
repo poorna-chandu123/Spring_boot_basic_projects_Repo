@@ -14,7 +14,7 @@ public interface CitizenRepo extends JpaRepository<CitizenPlane, Integer> ,
         JpaSpecificationExecutor<CitizenPlane> {
 
     // native query to get distinct citizen plane names
-     @Query(value = "SELECT DISTINCT citizen_plane_name FROM citizen_plan", nativeQuery = true)
+         @Query(value = "SELECT DISTINCT citizen_plane_name FROM citizen_plan", nativeQuery = true)
      List<String> findDistinctCitizenPlaneNames();
         // native query to get distinct citizen plane status
         @Query(value = "SELECT DISTINCT citizen_plane_status FROM citizen_plan", nativeQuery = true)
