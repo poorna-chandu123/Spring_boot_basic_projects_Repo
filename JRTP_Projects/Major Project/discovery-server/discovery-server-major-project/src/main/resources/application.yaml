@@ -1,0 +1,11 @@
+#spring:
+#  application:
+#    name: discovery-server-major-project
+
+# Keep this minimal
+spring:
+  application:
+    name: discovery-server   # ⭐ REQUIRED LOCALLY
+
+  config:
+    import: "configserver:http://localhost:8888?failFast=true"

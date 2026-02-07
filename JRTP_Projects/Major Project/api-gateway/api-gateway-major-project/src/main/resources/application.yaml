@@ -1,0 +1,20 @@
+
+spring:
+  application:
+    name: api-gateway   # REQUIRED locally
+
+  config:
+    import: "configserver:http://localhost:8888?failFast=true"
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+# Do NOT put server.port here
+# It will come from Config Server
+
+  #⚠️ DO NOT remove spring.application.name
+ # ⚠️ DO NOT hardcode port here

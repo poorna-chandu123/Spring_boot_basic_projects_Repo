@@ -1,0 +1,21 @@
+# ==================================================
+# ADMIN SERVICE CONFIGURATION
+# ==================================================
+
+spring:
+  application:
+    name: admin-service
+
+server:
+  port: 8081
+
+admin:
+  feature:
+    enable-dashboard: true
+    max-users: 100
+
+# NOTE:
+# Later add:
+# - MySQL config
+# - Security rules
+# - Feign client URLs

@@ -1,0 +1,18 @@
+# ==================================================
+# COMMON CONFIGURATION FOR ALL MICROSERVICES
+# ==================================================
+
+spring:
+  application:
+    name: common-config
+
+server:
+  port: 0   # Microservices will override this
+
+logging:
+  level:
+    root: INFO
+
+# NOTE:
+# This file is shared across all microservices
+# Later you can move DB, Redis, Kafka configs here

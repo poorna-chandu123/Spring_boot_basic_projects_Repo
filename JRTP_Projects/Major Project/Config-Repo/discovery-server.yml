@@ -1,0 +1,27 @@
+# =====================================================
+# DISCOVERY SERVER CONFIGURATION
+# =====================================================
+
+
+
+server:
+  port: 8761   # Standard Eureka port
+
+
+
+# SINGLE Eureka PORT avithe below Configuration
+#eureka:
+  #client:
+    #register-with-eureka: false # Eureka should NOT register itself
+    #fetch-registry: false   # Eureka should NOT fetch registry
+
+eureka:
+  client:
+    register-with-eureka: true # Multiple Euraka ni configure cheyali anukunnam kanuka true ani echham
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:4664/eureka/ #Clustered Eureka Server (Peer Mode lo set cheyali anukunte e tag rayali)
+  server:
+    enable-self-preservation: true
+    wait-time-in-ms-when-sync-empty: 5
+

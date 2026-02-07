@@ -1,0 +1,22 @@
+# =====================================================
+# API GATEWAY CONFIGURATION
+# =====================================================
+
+spring:
+  application:
+    name: api-gateway
+
+server:
+  port: 9090   # Public entry point
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:4664/eureka/
+  instance:
+    prefer-ip-address: true
+
+# I WILL CHANGE THIS LATER
+jwt:
+  secret: JwtSecretKey1231233484347790416347825343yr54w4356363925444444
+  expiration-seconds: 3600000

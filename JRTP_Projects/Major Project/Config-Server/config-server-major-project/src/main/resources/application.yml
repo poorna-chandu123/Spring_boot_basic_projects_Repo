@@ -1,0 +1,42 @@
+# =====================================================
+# CONFIG SERVER CONFIGURATION
+# =====================================================
+
+server:
+  port: 8888   # Standard port for Config Server
+
+spring:
+  application:
+    name: config-server   # Service name
+
+  profiles:
+    active: native        # IMPORTANT: tells Spring to use local filesystem
+
+  cloud:
+    config:
+      server:
+        native:
+          # Path where your config-repo folder exists
+          # NOTE:
+          # - Use forward slashes
+          # - file:/// is mandatory
+          # - Space in folder name is allowed
+          search-locations:
+            - file:///D:/GIT_COPY/Springboot_Projects/Springboot_Basic_Topic_Projects/JRTP_Projects/Major Project/Config-Repo
+
+# =====================================================
+# ACTUATOR (for production readiness)
+# =====================================================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# =====================================================
+# NOTES FOR FUTURE
+# =====================================================
+# Later you can:
+# - Secure this server (Basic Auth / OAuth2)
+# - Move from native to Git config
+# - Add encryption for secrets

@@ -1,0 +1,44 @@
+
+
+server:
+  port: 7789 
+
+spring:
+  application:
+    name: auth-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/major_project_users_db
+    username: root
+    password: Root@123
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: Ov23liMjRvArJ6HH6AAU
+            client-secret: ab7ea344068593aa6a6177f8b8bc5a9194ec3bda
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:4664/eureka/
+  instance:
+    prefer-ip-address: true
+
+
+jwt:
+  secret: JwtSecretKey1231233484347790416347825343yr54w4356363925444444
+  expiration-ms: 3600000
+
+sql:
+  user-by-username: >
+    SELECT user_id, username, password, is_active
+    FROM users
+    WHERE username = ?
+
+  roles-by-userid: >
+    SELECT role_name
+    FROM roles
+    WHERE role_id = ?
