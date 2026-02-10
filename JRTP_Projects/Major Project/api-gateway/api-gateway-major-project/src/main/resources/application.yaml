@@ -13,6 +13,12 @@ spring:
           enabled: true
           lower-case-service-id: true
 
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.server: DEBUG
+
+
 # Do NOT put server.port here
 # It will come from Config Server
 

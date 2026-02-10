@@ -1,7 +1,5 @@
-
-
 server:
-  port: 7789 
+  port: 7789
 
 spring:
   application:
@@ -19,6 +17,14 @@ spring:
           github:
             client-id: Ov23liMjRvArJ6HH6AAU
             client-secret: ab7ea344068593aa6a6177f8b8bc5a9194ec3bda
+            # FIX: hardcode redirect URI via API Gateway
+            redirect-uri: "http://localhost:9090/auth-service/login/oauth2/code/github"
+        provider:
+          github:
+            authorization-uri: https://github.com/login/oauth/authorize
+            token-uri: https://github.com/login/oauth/access_token
+            user-info-uri: https://api.github.com/user
+            user-name-attribute: login
 
 eureka:
   client:
@@ -26,7 +32,6 @@ eureka:
       defaultZone: http://localhost:8761/eureka/,http://localhost:4664/eureka/
   instance:
     prefer-ip-address: true
-
 
 jwt:
   secret: JwtSecretKey1231233484347790416347825343yr54w4356363925444444
@@ -42,3 +47,8 @@ sql:
     SELECT role_name
     FROM roles
     WHERE role_id = ?
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

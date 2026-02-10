@@ -3,9 +3,17 @@
 #    name: discovery-server-major-project
 
 # Keep this minimal
+# Keep this minimal
+
+# Keep this minimal
 spring:
   application:
-    name: discovery-server   # ⭐ REQUIRED LOCALLY
+    name: discovery-server   # ⭐ REQUIRED: Matches the config repo file names (e.g., discovery-server-8761.yml)
 
   config:
-    import: "configserver:http://localhost:8888?failFast=true"
+    import: "configserver:http://localhost:8888?failFast=true"  # Pulls configs from your local config server
+
+
+
+  #profiles: Two sepertae YML files kosam rasam but setup not worked
+   # active: ${SPRING_PROFILES_ACTIVE:default}  # ⭐ REQUIRED: Forces VM args to activate the profile

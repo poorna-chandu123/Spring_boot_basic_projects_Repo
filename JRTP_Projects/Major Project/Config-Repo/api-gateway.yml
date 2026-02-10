@@ -1,10 +1,26 @@
-# =====================================================
-# API GATEWAY CONFIGURATION
-# =====================================================
-
 spring:
   application:
     name: api-gateway
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true             # Auto route all Eureka services
+          lower-case-service-id: true
+      routes:
+        # OAuth2 routing
+        - id: auth-service-oauth
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth-service/oauth2/**
+            - Path=/login/oauth2/**
+            - Path=/oauth2/**
+          filters:
+            # Rewrite paths so API Gateway forwards requests correctly
+            - RewritePath=/auth-service/oauth2/(?<remaining>.*), /${remaining}
+            - RewritePath=/login/oauth2/(?<remaining>.*), /${remaining}
+            - RewritePath=/oauth2/(?<remaining>.*), /${remaining}
 
 server:
   port: 9090   # Public entry point
@@ -16,7 +32,11 @@ eureka:
   instance:
     prefer-ip-address: true
 
-# I WILL CHANGE THIS LATER
 jwt:
   secret: JwtSecretKey1231233484347790416347825343yr54w4356363925444444
   expiration-seconds: 3600000
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.server: DEBUG

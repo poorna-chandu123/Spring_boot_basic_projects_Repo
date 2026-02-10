@@ -30,11 +30,16 @@ public class OAuth2SuccessHandler
             Authentication authentication) throws IOException {
 
         // Get GitHub user details
-        OAuth2User user =
-                (OAuth2User) authentication.getPrincipal();
+
+        OAuth2User user = (OAuth2User) authentication.getPrincipal();
 
         // GitHub username
         String username = user.getAttribute("login");
+        String email    = user.getAttribute("email");
+
+        if (email == null) {
+            email = username + "@github.local";
+        }
 
         // Check if user already exists
         Integer count = jdbcTemplate.queryForObject(
@@ -43,36 +48,35 @@ public class OAuth2SuccessHandler
                 username
         );
 
-        // If first time login, insert user
+        // Insert if the user first time login means
         if (count != null && count == 0) {
-
-            // Insert into users table
             jdbcTemplate.update(
-                    "INSERT INTO users(username,password,is_active) " +
-                            "VALUES (?,?,?,?)",
+                    "INSERT INTO users(username, password, is_active, role_id,email) " +
+                            "VALUES (?, ?, ?, ?,?)",
                     username,
-                    "OAUTH_USER", // dummy password
-                    "Y"
-            );
-
-            // Assign GIT user role
-            jdbcTemplate.update(
-                    "INSERT INTO user_roles(user_id,role_name) " +
-                            "SELECT user_id,'ROLE_GIT_USER' FROM users WHERE username=?",
-                    username
+                    "OAUTH_USER",
+                    "Y",
+                    2   ,
+                    email// FK to roles table
             );
         }
 
-        // Generate JWT for GitHub user
-        String token =
-                jwtUtil.generateToken(
-                        username,
-                        List.of("ROLE_GIT_USER")
-                );
+        // Fetch role name for JWT
+        String role = jdbcTemplate.queryForObject(
+                "SELECT r.role_name " +
+                        "FROM users u JOIN roles r ON u.role_id = r.role_id " +
+                        "WHERE u.username = ?",
+                String.class,
+                username
+        );
 
-        // Send token as JSON response
+        // Generate JWT using DB role
+        String token = jwtUtil.generateToken(
+                username,
+                List.of(role)
+        );
+
         response.setContentType("application/json");
-        response.getWriter()
-                .write("{\"token\":\"" + token + "\"}");
+        response.getWriter().write("{\"token\":\"" + token + "\"}");
     }
 }

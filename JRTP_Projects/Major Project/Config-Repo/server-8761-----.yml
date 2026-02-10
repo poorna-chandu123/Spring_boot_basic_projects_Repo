@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: discovery-server
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${server.port}  # Unique ID for this instance
+
+  client:
+    register-with-eureka: true   # ⭐ Enable registration with peers
+    fetch-registry: true        # ⭐ Enable fetching registry from peers
+    service-url:
+      defaultZone: http://localhost:4664/eureka/,http://localhost:8761/eureka/  # ⭐ Both peers listed
+
+  server:
+    enable-self-preservation: true
+    wait-time-in-ms-when-sync-empty: 5000  # ⭐ 5-second wait for peers during startup

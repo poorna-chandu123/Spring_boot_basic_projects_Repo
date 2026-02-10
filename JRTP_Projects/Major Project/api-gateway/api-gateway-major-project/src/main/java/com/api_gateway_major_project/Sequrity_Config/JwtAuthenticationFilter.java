@@ -103,12 +103,16 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         log.info("inside filter method of JwtAuthenticationFilter, request path: {}", path);
 
         // ===============================
-        // PUBLIC ENDPOINTS
+        // PUBLIC ENDPOINTS if the URL starts with /auth/ or /actuator, then we will allow the request to pass through without JWT validation.
         // ===============================
         if (path.startsWith("/auth/")
+                || path.startsWith("/oauth2/")
+                || path.startsWith("/login/")
                 || path.startsWith("/actuator")) {
+            log.info("Public endpoint detected, skipping JWT validation: {}", path);
             return chain.filter(exchange);
         }
+
 
         // ===============================
         // AUTH HEADER CHECK
