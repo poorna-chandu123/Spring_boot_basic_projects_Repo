@@ -1,0 +1,51 @@
+# =====================================================
+# DISCOVERY SERVER CONFIGURATION
+# =====================================================
+
+
+
+#server:
+ # port: 8761   # Standard Eureka port
+
+
+
+# SINGLE Eureka PORT avithe below Configuration
+#eureka:
+  #client:
+    #register-with-eureka: false # Eureka should NOT register itself
+    #fetch-registry: false   # Eureka should NOT fetch registry
+
+#eureka:
+ # client:
+ #   register-with-eureka: true # Multiple Euraka ni configure cheyali anukunnam kanuka true ani echham
+ #   fetch-registry: true
+ #   service-url:
+  #    defaultZone: http://localhost:8761/eureka/,http://localhost:4664/eureka/ #Clustered Eureka Server (Peer Mode lo set cheyali anukunte e tag rayali)
+  #server:
+  #  enable-self-preservation: true
+  #  wait-time-in-ms-when-sync-empty: 5
+
+# Note : in single YML file lo 2 Eurak ports ni peer option lo set-up cheyali anukunte chala options vunnay below is one of the Example Google chesthe multiple ways lo rayachhu 
+# but 2 diffrent YML's lo rayali anukunte daniki one of the best way alredy chesanu clear notes kuda vundi
+
+spring:
+  application:
+    name: discovery-server
+    
+server:
+  port: ${SERVER_PORT:8761}
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${server.port}
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${EUREKA_PEER_URL}
+
+  server:
+    enable-self-preservation: true
+    wait-time-in-ms-when-sync-empty: 5
